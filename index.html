@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+        <h2>MotionStudio.</h2>
+
+        <nav>
+           
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#courses">Courses</a>
+    <a href="#contact">Contact</a>
+
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <h1>WE CREATE<br> DIGITAL MAGIC.</h1>
+        <p>Creative websites. Beautiful experiences.</p>
+        <button onclick="document.querySelector('#work').scrollIntoView({behavior:'smooth'})">
+            Explore Our Work
+        </button>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about reveal">
+        <h1>We are Motion Studio.</h1>
+        <p>
+            We build beautiful digital experiences
+            using creativity and technology.
+        </p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services reveal">
+        <h1>Our Services</h1>
+
+        <div class="cards">
+            <div class="card">Web Design</div>
+            <div class="card">Development</div>
+            <div class="card">Animation</div>
+        </div>
+    </section>
+
+    <!-- HORIZONTAL SELECTED WORKS -->
+    <section id="work" class="horizontal-work">
+
+        <div class="horizontal-heading">
+            <p>EXPLORE OUR WORLD</p>
+            <h1>Selected Works<span>.</span></h1>
+            <p class="scroll-hint">SCROLL TO EXPLORE →</p>
+        </div>
+
+        <div class="horizontal-track">
+
+            <!-- PROJECT 1 -->
+            <div class="horizontal-card">
+                <img
+                    src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=1400"
+                    alt="Night city">
+
+                <div class="horizontal-info">
+                    <span>01 / 03</span>
+                    <h2>Digital Universe</h2>
+                    <p>Creative digital experiences</p>
+                </div>
+            </div>
+
+            <!-- PROJECT 2 -->
+            <div class="horizontal-card">
+                <img
+                    src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1400"
+                    alt="Modern architecture">
+
+                <div class="horizontal-info">
+                    <span>02 / 03</span>
+                    <h2>Architecture</h2>
+                    <p>Design beyond boundaries</p>
+                </div>
+            </div>
+
+            <!-- PROJECT 3 -->
+            <div class="horizontal-card">
+                <img
+                    src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1400"
+                    alt="Creative visual art">
+
+                <div class="horizontal-info">
+                    <span>03 / 03</span>
+                    <h2>Beyond Reality</h2>
+                    <p>Immersive visual storytelling</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- ===== COURSES SECTION START ===== -->
+<section class="courses-section" id="courses">
+  <div class="courses-bg-glow courses-bg-glow-1"></div>
+  <div class="courses-bg-glow courses-bg-glow-2"></div>
+
+  <div class="courses-container">
+    <div class="courses-header courses-reveal">
+      <span class="courses-eyebrow">Learn With Motion Studio</span>
+      <h2 class="courses-title">Explore Our Courses.</h2>
+      <p class="courses-subtitle">
+        Industry-focused programs designed by experts to take you from beginner to job-ready.
+      </p>
+    </div>
+
+    <div class="courses-grid">
+
+      <!-- Course 1 -->
+      <article class="course-card courses-reveal" style="--delay: 0.1s">
+        <div class="course-image-wrap">
+          <img src="images/fullstack.jpg" alt="Full Stack Web Development course" loading="lazy"
+               onerror="this.style.display='none'">
+          <span class="course-badge">Most Popular</span>
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">Full Stack Web Development</h3>
+          <p class="course-desc">Build complete web apps with HTML, CSS, JavaScript, React, Node.js and databases.</p>
+          <div class="course-meta">
+            <span class="course-duration">⏱ 6 Months</span>
+            <span class="course-price">₹49,999</span>
+          </div>
+          <button class="course-btn" type="button" data-course="Full Stack Web Development">Enroll Now</button>
+        </div>
+      </article>
+
+      <!-- Course 2 -->
+      <article class="course-card courses-reveal" style="--delay: 0.2s">
+        <div class="course-image-wrap">
+          <img src="images/python.jpg" alt="Python Programming course" loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">Python Programming</h3>
+          <p class="course-desc">Master Python fundamentals, OOP, automation and real-world scripting projects.</p>
+          <div class="course-meta">
+            <span class="course-duration">⏱ 3 Months</span>
+            <span class="course-price">₹24,999</span>
+          </div>
+          <button class="course-btn" type="button" data-course="Python Programming">Enroll Now</button>
+        </div>
+      </article>
+
+      <!-- Course 3 -->
+      <article class="course-card courses-reveal" style="--delay: 0.3s">
+        <div class="course-image-wrap">
+          <img src="images/ai-ml.jpg" alt="Artificial Intelligence and Machine Learning course" loading="lazy"
+               onerror="this.style.display='none'">
+          <span class="course-badge">Trending</span>
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">Artificial Intelligence &amp; Machine Learning</h3>
+          <p class="course-desc">Learn neural networks, data modelling, and deploy AI models to production.</p>
+          <div class="course-meta">
+            <span class="course-duration">⏱ 5 Months</span>
+            <span class="course-price">₹69,999</span>
+          </div>
+          <button class="course-btn" type="button" data-course="Artificial Intelligence & Machine Learning">Enroll Now</button>
+        </div>
+      </article>
+
+      <!-- Course 4 -->
+      <article class="course-card courses-reveal" style="--delay: 0.4s">
+        <div class="course-image-wrap">
+          <img src="images/uiux.jpg" alt="UI/UX Design course" loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">UI/UX Design</h3>
+          <p class="course-desc">Design intuitive interfaces with research, wireframes, prototyping and Figma.</p>
+          <div class="course-meta">
+            <span class="course-duration">⏱ 3 Months</span>
+            <span class="course-price">₹34,999</span>
+          </div>
+          <button class="course-btn" type="button" data-course="UI/UX Design">Enroll Now</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+<!-- ===== COURSES SECTION END ===== -->
+
+<!-- BOOKING MODAL -->
+<div class="booking-modal" id="bookingModal">
+    <div class="booking-box">
+        <button class="booking-close" id="closeBooking">×</button>
+
+        <h2>Book Your Course</h2>
+        <p>Start your learning journey with Motion Studio.</p>
+
+        <form id="bookingForm">
+            <input type="text" id="studentName"
+                placeholder="Your full name" required>
+
+            <input type="email" id="studentEmail"
+                placeholder="Your email address" required>
+
+            <input type="tel" id="studentPhone"
+                placeholder="Your phone number" required>
+
+            <select id="selectedCourse" required>
+                <option value="">Select a course</option>
+                <option>Full Stack Web Development</option>
+                <option>Python Programming</option>
+                <option>Artificial Intelligence & Machine Learning</option>
+                <option>UI/UX Design</option>
+            </select>
+
+            <input type="date" id="bookingDate" required>
+
+            <button type="submit">Submit Booking</button>
+        </form>
+
+        <p id="bookingMessage"></p>
+    </div>
+</div>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact reveal">
+        <h1>Let's Work Together.</h1>
+        <p>Have an idea? Let's bring it to life.</p>
+    </section>
+
+    <!-- GSAP LIBRARIES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js"></script>
+
+    <!-- YOUR JAVASCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,488 @@
+
+/* BASIC SETTINGS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #09090f;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* NAVIGATION */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    background: rgba(9, 9, 15, 0.85);
+    backdrop-filter: blur(15px);
+}
+
+header h2 {
+    color: #a78bfa;
+    font-size: 25px;
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #a78bfa;
+}
+
+/* HERO SECTION */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 20px 50px;
+    background:
+      radial-gradient(circle at center,
+      #30205a 0%,
+      #11101c 45%,
+      #09090f 75%);
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 100px);
+    line-height: 1.1;
+    letter-spacing: -4px;
+    margin-bottom: 25px;
+}
+
+.hero p {
+    color: #b5b5c5;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+/* BUTTON */
+button {
+    padding: 16px 35px;
+    background: #8b5cf6;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #a78bfa;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px #8b5cf677;
+}
+
+/* COMMON SECTIONS */
+.about,
+.services,
+.contact {
+    min-height: 75vh;
+    padding: 130px 8%;
+    text-align: center;
+}
+
+.about h1,
+.services h1,
+.contact h1 {
+    font-size: clamp(35px, 5vw, 55px);
+    margin-bottom: 25px;
+}
+
+.about p,
+.contact p {
+    color: #aaa;
+    font-size: 18px;
+}
+
+/* SERVICE CARDS */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #171722;
+    border: 1px solid #343044;
+    border-radius: 20px;
+    padding: 55px 35px;
+    min-width: 220px;
+    font-size: 22px;
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    border-color: #a78bfa;
+    box-shadow: 0 15px 40px #8b5cf633;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 600px) {
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav {
+        gap: 15px;
+        font-size: 13px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+}
+
+/* SCROLL REVEAL ANIMATION */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* SELECTED WORKS */
+
+.work {
+    padding: 120px 8%;
+    background: #0c0b13;
+}
+
+.work-heading {
+    margin-bottom: 70px;
+}
+
+.work-heading p {
+    color: #a78bfa;
+    letter-spacing: 5px;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.work-heading h1 {
+    font-size: clamp(45px, 8vw, 90px);
+    letter-spacing: -4px;
+}
+
+.project-card {
+    margin-bottom: 100px;
+}
+
+.project-image {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #202030;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.2);
+}
+
+.project-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 25px;
+    gap: 15px;
+}
+
+.project-info h2 {
+    font-size: 25px;
+}
+
+.project-info p {
+    color: #999;
+}
+
+@media (max-width: 600px) {
+    .project-image {
+        height: 300px;
+    }
+
+    .project-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ==============================
+   HORIZONTAL SELECTED WORKS
+============================== */
+
+.horizontal-work {
+    background: #09090f;
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+.horizontal-heading {
+    padding: 0 8%;
+    margin-bottom: 50px;
+}
+
+.horizontal-heading > p:first-child {
+    color: #a78bfa;
+    letter-spacing: 5px;
+    font-size: 12px;
+}
+
+.horizontal-heading h1 {
+    font-size: clamp(45px, 8vw, 90px);
+    margin: 20px 0;
+    letter-spacing: -4px;
+}
+
+.horizontal-heading h1 span {
+    color: #a78bfa;
+}
+
+.scroll-hint {
+    color: #999;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+/* Horizontal track */
+
+.horizontal-track {
+    display: flex;
+    gap: 30px;
+    padding-left: 8%;
+    width: max-content;
+}
+
+/* Project cards */
+
+.horizontal-card {
+    width: 70vw;
+    max-width: 850px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+.horizontal-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.horizontal-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Project information */
+
+.horizontal-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    background: linear-gradient(
+        transparent,
+        rgba(0, 0, 0, 0.9)
+    );
+}
+
+.horizontal-info span {
+    color: #c4b5fd;
+}
+
+.horizontal-info h2 {
+    font-size: 38px;
+    margin: 12px 0;
+}
+
+.horizontal-info p {
+    color: #ddd;
+}
+
+/* Mobile responsive */
+
+@media (max-width: 600px) {
+    .horizontal-card {
+        width: 85vw;
+        height: 350px;
+    }
+
+    .horizontal-info {
+        padding: 20px;
+    }
+
+    .horizontal-info h2 {
+        font-size: 26px;
+    }
+}
+
+/* ==============================
+   COURSE BOOKING POPUP
+============================== */
+
+.booking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.booking-modal.active {
+    display: flex;
+}
+
+.booking-box {
+    width: 100%;
+    max-width: 480px;
+    background: #151520;
+    border: 1px solid #39304f;
+    border-radius: 22px;
+    padding: 35px;
+    position: relative;
+
+    animation: bookingAppear 0.4s ease;
+}
+
+@keyframes bookingAppear {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.booking-box h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.booking-box > p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.booking-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#bookingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#bookingForm input,
+#bookingForm select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #383044;
+    background: #20202d;
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#bookingForm input:focus,
+#bookingForm select:focus {
+    border-color: #a78bfa;
+}
+
+#bookingForm button {
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #8b5cf6;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#bookingForm button:hover {
+    background: #a78bfa;
+    transform: translateY(-3px);
+}
+
+#bookingMessage {
+    color: #a78bfa;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Mobile layout */
+@media (max-width: 500px) {
+    .booking-box {
+        padding: 25px 20px;
+    }
+
+    .booking-box h2 {
+        font-size: 25px;
+    }
+}

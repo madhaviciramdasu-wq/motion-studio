@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Studio | Admin Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #09090f;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            background: #151520;
+            border: 1px solid #39304f;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.35);
+        }
+
+        .login-box h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            color: #aaa;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 16px;
+            border: 1px solid #383044;
+            border-radius: 10px;
+            background: #20202d;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .login-box input:focus {
+            border-color: #a78bfa;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #8b5cf6;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-box button:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        #loginMessage {
+            margin-top: 18px;
+            color: #ff7777;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-box">
+        <h1>Motion Studio</h1>
+        <p>Admin login. Sign in to manage course bookings.</p>
+
+        <form id="loginForm">
+            <input
+                type="email"
+                id="adminEmail"
+                placeholder="Admin email"
+                autocomplete="username"
+                required
+            >
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Admin password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit" id="loginButton">
+                Sign In
+            </button>
+        </form>
+
+        <div id="loginMessage" role="status"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL =
+            "https://tzfmnfivlvakszdnlizv.supabase.co";
+
+        const SUPABASE_KEY = "sb_publishable_L3zinjmfktL9mU2iYwBujg_tB2dcBtz";
+
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+        const loginForm = document.getElementById("loginForm");
+        const loginMessage = document.getElementById("loginMessage");
+        const loginButton = document.getElementById("loginButton");
+
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            loginButton.disabled = true;
+            loginButton.textContent = "Signing in...";
+            loginMessage.textContent = "";
+
+            const email =
+                document.getElementById("adminEmail").value.trim();
+
+            const password =
+                document.getElementById("adminPassword").value;
+
+            const { data, error } =
+                await supabaseClient.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+            if (error) {
+                loginMessage.textContent =
+                    "Login failed. Check your email and password.";
+
+                loginButton.disabled = false;
+                loginButton.textContent = "Sign In";
+                return;
+            }
+
+            window.location.href = "admin.html";
+        });
+    </script>
+
+</body>
+</html>

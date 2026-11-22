@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Motion Studio | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #09090f;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 25px;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .admin-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .admin-header p {
+            color: #aaa;
+        }
+
+        .admin-button {
+            padding: 13px 22px;
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .admin-button:hover {
+            background: #a78bfa;
+            transform: translateY(-2px);
+        }
+
+        .admin-button:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .admin-card {
+            background: #151520;
+            border: 1px solid #30283f;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .admin-stats .admin-card {
+            margin-bottom: 0;
+        }
+
+        .admin-card h2 {
+            font-size: 17px;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 38px;
+            color: #a78bfa;
+            font-weight: bold;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            color: white;
+            margin: 0;
+        }
+
+        .admin-table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th, td {
+            padding: 16px 14px;
+            text-align: left;
+            border-bottom: 1px solid #30283f;
+        }
+
+        th {
+            color: #a78bfa;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        td {
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        tr:hover td {
+            background: #1d1b2a;
+        }
+
+        #adminMessage {
+            color: #a78bfa;
+            margin: 15px 0;
+        }
+
+        .empty-message {
+            color: #aaa;
+            padding: 25px;
+            text-align: center;
+        }
+
+        @media(max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .admin-header h1 {
+                font-size: 25px;
+            }
+
+            .admin-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="admin-container">
+
+        <!-- HEADER -->
+        <header class="admin-header">
+
+            <div>
+                <h1>Motion Studio</h1>
+                <p>Admin Dashboard / Manage your bookings</p>
+            </div>
+
+            <div>
+                <button class="admin-button" id="refreshButton">
+                    Refresh
+                </button>
+
+                <button class="admin-button" id="logoutButton">
+                    Logout
+                </button>
+            </div>
+
+        </header>
+
+
+        <!-- STATISTICS -->
+        <section class="admin-stats">
+
+            <div class="admin-card">
+                <h2>Total Bookings</h2>
+                <div class="stat-number" id="totalBookings">0</div>
+            </div>
+
+            <div class="admin-card">
+                <h2>Available Courses</h2>
+                <div class="stat-number">4</div>
+            </div>
+
+        </section>
+
+
+        <!-- BOOKINGS TABLE -->
+        <section class="admin-card">
+
+            <div class="section-heading">
+                <h2>Recent Bookings</h2>
+            </div>
+
+            <p id="adminMessage">Checking admin access...</p>
+
+            <div class="admin-table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Booking Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="bookingTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- SUPABASE LIBRARY -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- DASHBOARD LOGIC -->
+    <script>
+
+        // SUPABASE CONNECTION
+
+        const SUPABASE_URL =
+            "https://tzfmnfivlvakszdnlizv.supabase.co";
+
+        const SUPABASE_KEY = "sb_publishable_L3zinjmfktL9mU2iYwBujg_tB2dcBtz";
+
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+        // ELEMENTS
+
+        const totalBookings =
+            document.getElementById("totalBookings");
+
+        const bookingTable =
+            document.getElementById("bookingTable");
+
+        const adminMessage =
+            document.getElementById("adminMessage");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const refreshButton =
+            document.getElementById("refreshButton");
+
+
+        // CHECK ADMIN LOGIN
+
+        async function checkAdminLogin() {
+
+            const { data, error } =
+                await supabaseClient.auth.getSession();
+
+            if (error || !data.session) {
+
+                window.location.replace("admin-login.html");
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+
+
+        // LOAD BOOKINGS
+
+        async function loadBookings() {
+
+            adminMessage.textContent = "Loading bookings...";
+
+            bookingTable.replaceChildren();
+
+            const { data, error } = await supabaseClient
+                .from("bookings")
+                .select("id, student_name, email, course, booking_date, created_at")
+                .order("created_at", { ascending: false });
+
+            if (error) {
+
+                console.error("Booking error:", error);
+
+                adminMessage.textContent =
+                    "Unable to load bookings. Check database permissions.";
+
+                return;
+
+            }
+
+            totalBookings.textContent = data.length;
+
+            if (data.length === 0) {
+
+                adminMessage.textContent =
+                    "No bookings received yet.";
+
+                return;
+
+            }
+
+            adminMessage.textContent =
+                "Bookings loaded successfully.";
+
+            data.forEach((booking) => {
+
+                const row = document.createElement("tr");
+
+                const values = [
+                    booking.student_name,
+                    booking.email,
+                    booking.course,
+                    booking.booking_date
+                ];
+
+                values.forEach((value) => {
+
+                    const cell = document.createElement("td");
+
+                    cell.textContent = value || "-";
+
+                    row.appendChild(cell);
+
+                });
+
+                bookingTable.appendChild(row);
+
+            });
+
+        }
+
+
+        // REFRESH BUTTON
+
+        refreshButton.addEventListener("click", async () => {
+
+            refreshButton.disabled = true;
+            refreshButton.textContent = "Loading...";
+
+            await loadBookings();
+
+            refreshButton.disabled = false;
+            refreshButton.textContent = "Refresh";
+
+        });
+
+
+        // LOGOUT
+
+        logoutButton.addEventListener("click", async () => {
+
+            logoutButton.disabled = true;
+
+            const { error } =
+                await supabaseClient.auth.signOut();
+
+            if (error) {
+                adminMessage.textContent = "Logout failed. Try again.";
+                logoutButton.disabled = false;
+                return;
+            }
+
+            window.location.replace("admin-login.html");
+
+        });
+
+
+        // START DASHBOARD
+
+        async function startDashboard() {
+
+            const loggedIn = await checkAdminLogin();
+
+            if (loggedIn) {
+
+                await loadBookings();
+
+            }
+
+        }
+
+        startDashboard();
+
+    </script>
+
+</body>
+</html>
